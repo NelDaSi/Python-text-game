@@ -4,7 +4,6 @@ import items
 import world
 
 # _______Player Class_______
-# _______init = Run on start_______
 
 
 class Player:
@@ -12,16 +11,14 @@ class Player:
         self.inventory = [items.Rock(),
                           items.Dagger(),
                           items.CrustyBread()]
-
-# _______Start Position_______
-
-        self.x = 1
-        self.y = 2
-
-# _______Healt_______
-
+        self.x = world.start_tile_location[0]
+        self.y = world.start_tile_location[1]
         self.hp = 100
         self.gold = 5
+        self.victory = False
+
+    def is_alive(self):
+        return self.hp > 0
 
 # _______Show inventory_______
 
@@ -105,3 +102,7 @@ class Player:
             print("You killed {}!".format(enemy.name))
         else:
             print("{} HP is {}.".format(enemy.name, enemy.hp))
+
+    def trade(self):
+        room = world.tile_at(self.x, self.y)
+        room.check_if_trade(self)

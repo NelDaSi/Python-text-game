@@ -49,7 +49,7 @@ class EnemyTile(MapTile):
         super().__init__(x, y)
 
     def intro_text(self):
-        text = self.alive_text if self.enemy.is_alive() else self.dead_text
+        text = self.alive_text if self.enemy.is_alive()else self.dead_text
         return text
 
     def modify_player(self, player):
@@ -57,6 +57,30 @@ class EnemyTile(MapTile):
             player.hp = player.hp - self.enemy.damage
             print("Enemy does {} damage. You have {} HP remaining."
                   .format(self.enemy.damage, player.hp))
+
+
+class FindGoldTile(MapTile):
+    def __init__(self, x, y):
+        self.gold = random.randint(1, 50)
+        self.gold_claimed = False
+        super().__init__(x, y)
+
+    def modify_player(self, player):
+        if not self.gold_claimed:
+            self.gold_claimed = True
+            player.gold = player.gold + self.gold
+            print("+{} gold added.".format(self.gold))
+
+    def intro_text(self):
+        if self.gold_claimed:
+            return """
+                    Another unremarkable part of the cave. You
+                     must forge onwards.
+                """
+        else:
+            return """
+                    Someone dropped some gold. You pick it up.
+                """
 
 
 class StartTile(MapTile):
@@ -73,10 +97,33 @@ class BoringTile(MapTile):
 
 
 class VictoryTile(MapTile):
+
+    def modify_player(self, player):
+        player.victory = True
+
     def intro_text(self):
         return """You see a bright light in the distance...
                 ... it grows as you get closer! It's sunlight!
                 Victory is yours!"""
+
+
+world_dsl = """
+|EN|EN|VT|EN|EN|
+|EN|  |  |  |EN|
+|EN|FG|EN|  |TT|
+|TT|  |ST|FG|EN|
+|FG|  |EN|  |FG|
+"""
+
+tile_type_dict = {"VT": VictoryTile,
+                  "BR": BoringTile,
+                  "EN": EnemyTile,
+                  "ST": StartTile,
+                  "FG": FindGoldTile,
+                  "TT": TraderTile,
+                  "  ": None}
+
+world_map = []
 
 
 def tile_at(x, y):
@@ -86,19 +133,6 @@ def tile_at(x, y):
         return world_map[y][x]
     except IndexError:
         return None
-
-
-world_dsl = """
-|BR|VT|  |
-|  |EN|  |
-|EN|ST|EN|
-|  |EN|  |
-"""
-
-tile_type_dict = {"VT": VictoryTile,
-                  "EN": EnemyTile,
-                  "ST": StartTile,
-                  "  ": None}
 
 
 def parse_world_dsl():
@@ -114,7 +148,10 @@ def parse_world_dsl():
         dsl_cells = [c for c in dsl_cells if c]
         for x, dsl_cell in enumerate(dsl_cells):
             tile_type = tile_type_dict[dsl_cell]
-            row.append(tile_type(x, y) if tile_type else None)
+            if tile_type == StartTile:
+                global start_tile_location
+                start_tile_location = x, y
+                row.append(tile_type(x, y) if tile_type else None)
 
         world_map.append(row)
 
