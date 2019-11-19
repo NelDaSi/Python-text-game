@@ -47,7 +47,7 @@ class Dagger(Weapon):
 
 class RustySword(Weapon):
     def __init__(self):
-        self.name = "Rusty sword"
+        self.name = "Rusty sword  o==[]::::::::::::::::>"
         self.description = "This sword is showing its age, " \
             "but still has some fight in it."
         self.damage = 20

@@ -16,12 +16,14 @@ def play():
         if player.is_alive() and not player.victory:
             choose_action(room, player)
         elif not player.is_alive():
-            print("Your journey has come to an early end!")
+            print("Your journey has come to an early end!\n\n")
+            play()
 
 
 def get_available_actions(room, player):
     actions = OrderedDict()
     print("Choose an action: ")
+    action_adder(actions, 'q', player.quit_game, "Quit game.")
     if player.inventory:
         action_adder(actions, 'i', player.print_inventory, "Print inventory")
     if isinstance(room, world.TraderTile):

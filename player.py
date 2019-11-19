@@ -10,6 +10,7 @@ class Player:
     def __init__(self):
         self.inventory = [items.Rock(),
                           items.Dagger(),
+                          items.RustySword(),
                           items.CrustyBread()]
         self.x = world.start_tile_location[0]
         self.y = world.start_tile_location[1]
@@ -106,3 +107,9 @@ class Player:
     def trade(self):
         room = world.tile_at(self.x, self.y)
         room.check_if_trade(self)
+
+    def quit_game(self):
+        quit()
+
+    def restart(self):
+        pass

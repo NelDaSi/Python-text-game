@@ -15,6 +15,21 @@ class MapTile:
         pass
 
 
+class StartTile(MapTile):
+    def intro_text(self):
+        return """
+                ╔═════════════════════════════════════════════════════════════╗
+                    You find yourself in a cave with a flickering torch
+                    on the wall. You can make out four paths, each equally
+                    as dark and foreboding.
+                ╚═════════════════════════════════════════════════════════════╝
+                """
+        # return """You find yourself in a cave with a flickering torch
+        #         on the wall.
+        #         You can make out four paths, each equally as dark
+        #         and foreboding."""
+
+
 class TraderTile(MapTile):
     def __init__(self, x, y):
         self.trader = npc.Trader()
@@ -127,14 +142,6 @@ class FindGoldTile(MapTile):
             return """
                     Someone dropped some gold. You pick it up.
                 """
-
-
-class StartTile(MapTile):
-    def intro_text(self):
-        return """You find yourself in a cave with a flickering torch
-                on the wall.
-                You can make out four paths, each equally as dark
-                and foreboding."""
 
 
 class BoringTile(MapTile):
