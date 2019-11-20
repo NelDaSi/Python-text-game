@@ -1,6 +1,7 @@
 import random
 import enemies
 import npc
+import textimg
 
 
 class MapTile:
@@ -17,17 +18,7 @@ class MapTile:
 
 class StartTile(MapTile):
     def intro_text(self):
-        return """
-                ╔═════════════════════════════════════════════════════════════╗
-                    You find yourself in a cave with a flickering torch
-                    on the wall. You can make out four paths, each equally
-                    as dark and foreboding.
-                ╚═════════════════════════════════════════════════════════════╝
-                """
-        # return """You find yourself in a cave with a flickering torch
-        #         on the wall.
-        #         You can make out four paths, each equally as dark
-        #         and foreboding."""
+        return textimg.dungeon()
 
 
 class TraderTile(MapTile):
@@ -77,8 +68,11 @@ class TraderTile(MapTile):
 
     def intro_text(self):
         return """
-        A frail not-quite-human, not-quite-creature squats in the corner
-        clinking his gold coins together. He looks willing to trade.
+        ╔═════════════════════════════════════════════════════════════╗
+           A frail not-quite-human, not-quite-creature squats in the
+           corner clinking his gold coins together.
+           He looks willing to trade.
+        ╚═════════════════════════════════════════════════════════════╝
         """
 
 
@@ -144,7 +138,7 @@ class FindGoldTile(MapTile):
                 """
 
 
-class BoringTile(MapTile):
+class EmptyTile(MapTile):
     def intro_text(self):
         return "This is a very boring part of the cave."
 
@@ -155,17 +149,26 @@ class VictoryTile(MapTile):
         player.victory = True
 
     def intro_text(self):
-        return """You see a bright light in the distance...
-                ... it grows as you get closer! It's sunlight!
-                Victory is yours!"""
+        return """
+                ╔═════════════════════════════════════════════════════════════╗
+                   You see a bright light in the distance...
+                               ... it grows as you get closer! It's sunlight!
+                               Victory is yours!
+                ╚═════════════════════════════════════════════════════════════╝
+                """
 
 
 world_dsl = """
-|EN|EN|VT|EN|EN|
-|EN|  |  |  |EN|
-|EN|FG|EN|  |TT|
-|TT|  |ST|FG|EN|
-|FG|  |EN|  |FG|
+|ET|  |ET|ET|ET|ET|  |VT|  |ET|
+|ET|ET|ET|  |  |ET|  |ET|  |ET|
+|  |ET|  |ET|  |ET|  |ET|  |ET|
+|  |ET|  |ET|ET|ET|ET|ET|  |ET|
+|ET|ET|  |ET|ET|ET|ET|  |ET|ET|
+|  |ET|  |ET|ET|ET|ET|ET|ET|  |
+|ET|ET|ET|  |ET|ET|  |  |ET|ET|
+|  |ET|  |ET|ET|  |ET|ET|  |ET|
+|ET|ST|ET|  |ET|  |ET|ET|ET|ET|
+|  |ET|  |ET|ET|  |ET|ET|  |ET|
 """
 
 
@@ -189,6 +192,7 @@ tile_type_dict = {"VT": VictoryTile,
                   "ST": StartTile,
                   "FG": FindGoldTile,
                   "TT": TraderTile,
+                  "ET": EmptyTile,
                   "  ": None}
 
 

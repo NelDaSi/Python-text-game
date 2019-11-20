@@ -2,6 +2,7 @@
 from player import Player
 import world
 from collections import OrderedDict
+import os
 
 
 # ___Main___
@@ -22,8 +23,7 @@ def play():
 
 def get_available_actions(room, player):
     actions = OrderedDict()
-    print("Choose an action: ")
-    action_adder(actions, 'q', player.quit_game, "Quit game.")
+    print("Choose an action: \n")
     if player.inventory:
         action_adder(actions, 'i', player.print_inventory, "Print inventory")
     if isinstance(room, world.TraderTile):
@@ -39,6 +39,7 @@ def get_available_actions(room, player):
             action_adder(actions, 'e', player.move_east, "Go east")
         if world.tile_at(room.x - 1, room.y):
             action_adder(actions, 'w', player.move_west, "Go west")
+        action_adder(actions, 'q', player.quit_game, "Quit game.")
     if player.hp < 100:
         action_adder(actions, 'h', player.heal, "Heal")
     return actions
@@ -54,12 +55,26 @@ def choose_action(room, player):
     action = None
     while not action:
         available_actions = get_available_actions(room, player)
-        action_input = input("Action: ")
+        action_input = input("\nAction: ")
         action = available_actions.get(action_input)
         if action:
             action()
         else:
             print("Invalid action!")
 
+
+# def get_player_name(name):
+#     name = input("What's your name? > ")
+#     answer = input(f"Your name is {name}, is that correct? [Y|N] > ")
+#     if answer.lower() in ["y", "yes"]:
+#         pass
+#     elif answer.lower() in ["n", "no"]:
+#         pass
+#     else:
+#         pass
+#     return name
+#
+#
+# player_name = get_player_name()
 
 play()

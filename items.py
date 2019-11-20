@@ -1,9 +1,17 @@
+class Gadget:
+    def __init__(self):
+        raise NotImplementedError("Do not create raw Gadget objects.")
+
+    def __str__(self):
+        return self.name
+
+
 class Weapon:
     def __init__(self):
         raise NotImplementedError("Do not create raw Weapon objects.")
 
     def __str__(self):
-        return self.name
+        return "{} (+{} DMG)".format(self.name, self.damage)
 
 
 class Consumable:
@@ -12,6 +20,14 @@ class Consumable:
 
     def __str__(self):
         return "{} (+{} HP)".format(self.name, self.healing_value)
+
+
+class Portal_gun(Gadget):
+    def __init__(self):
+        self.name = "Portal Gun"
+        self.description = "Makes portals, duhh!!"
+        self.damage = 100
+        self.value = 200
 
 
 class HealingPotion(Consumable):

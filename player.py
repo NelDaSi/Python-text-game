@@ -8,9 +8,8 @@ import world
 
 class Player:
     def __init__(self):
-        self.inventory = [items.Rock(),
-                          items.Dagger(),
-                          items.RustySword(),
+        # self.name =
+        self.inventory = [items.Dagger(),
                           items.CrustyBread()]
         self.x = world.start_tile_location[0]
         self.y = world.start_tile_location[1]
@@ -22,7 +21,6 @@ class Player:
         return self.hp > 0
 
 # _______Show inventory_______
-
     def print_inventory(self):
         print("Inventory:")
         for item in self.inventory:
