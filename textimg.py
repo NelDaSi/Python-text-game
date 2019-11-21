@@ -3,38 +3,34 @@ class TextImg:
         raise NotImplementedError("Do not create raw TextImg objects.")
 
     def __str__(self):
-        return self.name
+        return self.textimg
 
 
-class dungeon(TextImg):
+class StartTile(TextImg):
     def __init__(self):
-        self.name = """
-╔═════════════════════════════════════════════════════════════╗
-    You find yourself in a cave with a flickering torch
-    on the wall. You can make out four paths, each equally
-    as dark and foreboding.
-╚═════════════════════════════════════════════════════════════╝
-                    """
+        self.textimg = ""
 
-    # def print_dungeon():
-    #     print()
-    #     print("   _________________________________________________________")
-    #     print(" /|     -_-                                             _-  |\ ")
-    #     print("/ |_-_- _                                         -_- _-   -| \ ")
-    #     print("  |                            _-  _--                      | ")
-    #     print("  |                            ,                            |")
-    #     print("  |      .-'````````'.        '(`        .-'```````'-.      |")
-    #     print("  |    .` |           `.      `)'      .` |           `.    |")
-    #     print("  |   /   |   ()        \      U      /   |    ()       \   |")
-    #     print("  |  |    |    ;         | o   T   o |    |    ;         |  |")
-    #     print("  |  |    |     ;        |  .  |  .  |    |    ;         |  |")
-    #     print("  |  |    |     ;        |   . | .   |    |    ;         |  |")
-    #     print("  |  |    |     ;        |    .|.    |    |    ;         |  |")
-    #     print("  |  |    |____;_________|     |     |    |____;_________|  |")
-    #     print("  |  |   /  __ ;   -     |     !     |   /     `'() _ -  |  |")
-    #     print("  |  |  / __  ()        -|        -  |  /  __--      -   |  |")
-    #     print("  |  | /        __-- _   |   _- _ -  | /        __--_    |  |")
-    #     print("  |__|/__________________|___________|/__________________|__|")
-    #     print(" /                                             _ -        lc \ ")
-    #     print("/   -_- _ -             _- _---                       -_-  -_ \ ")
-    #     print()
+
+class TrasderTile(TextImg):
+    def __init__(self):
+        self.textimg = ""
+
+
+class EnemyTile(TextImg):
+    def __init__(self):
+        self.textimg = ""
+
+
+class FindGoldTile(TextImg):
+    def __init__(self):
+        self.textimg = ""
+
+
+class EmptytTile(TextImg):
+    def __init__(self):
+        self.textimg = ""
+
+
+class VictoryTile(TextImg):
+    def __init__(self):
+        self.textimg = ""

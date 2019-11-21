@@ -1,16 +1,21 @@
 # __Imports__
+import os
 from player import Player
+import tiles
 import world
 from collections import OrderedDict
-import os
 
 
-# ___Main___
+def play_intro():
+    input("The Forgotten Morty."
+          "\nPress Enter...")
+
+
 def play():
-    print("Escape from Cave Terror! ")
     world.parse_world_dsl()
     player = Player()
     while player.is_alive() and not player.victory:
+        os.system('cls')
         room = world.tile_at(player.x, player.y)
         print(room.intro_text())
         room.modify_player(player)
@@ -18,18 +23,23 @@ def play():
             choose_action(room, player)
         elif not player.is_alive():
             print("Your journey has come to an early end!\n\n")
-            play()
+            print("Would you like to (R)estart or (Q)uit?")
+            choose_action(room, player)
 
 
 def get_available_actions(room, player):
     actions = OrderedDict()
     print("Choose an action: \n")
-    if player.inventory:
+    if player.inventory and player.is_alive():
         action_adder(actions, 'i', player.print_inventory, "Print inventory")
-    if isinstance(room, world.TraderTile):
+    if isinstance(room, tiles.TraderTile):
         action_adder(actions, 't', player.trade, "Trade")
-    if isinstance(room, world.EnemyTile) and room.enemy.is_alive():
-        action_adder(actions, 'a', player.attack, "Attack")
+    if isinstance(room, tiles.EnemyTile) and room.enemy.is_alive():
+        if not player.is_alive():
+            action_adder(actions, 'q', player.quit_game, "Quit game.")
+            action_adder(actions, 'r', player.restart_game, "Restart game.")
+        else:
+            action_adder(actions, 'a', player.attack, "Attack")
     else:
         if world.tile_at(room.x, room.y - 1):
             action_adder(actions, 'n', player.move_north, "Go north")
@@ -40,7 +50,7 @@ def get_available_actions(room, player):
         if world.tile_at(room.x - 1, room.y):
             action_adder(actions, 'w', player.move_west, "Go west")
         action_adder(actions, 'q', player.quit_game, "Quit game.")
-    if player.hp < 100:
+    if player.hp < 100 and not player.hp <= 0:
         action_adder(actions, 'h', player.heal, "Heal")
     return actions
 
@@ -63,18 +73,6 @@ def choose_action(room, player):
             print("Invalid action!")
 
 
-# def get_player_name(name):
-#     name = input("What's your name? > ")
-#     answer = input(f"Your name is {name}, is that correct? [Y|N] > ")
-#     if answer.lower() in ["y", "yes"]:
-#         pass
-#     elif answer.lower() in ["n", "no"]:
-#         pass
-#     else:
-#         pass
-#     return name
-#
-#
-# player_name = get_player_name()
+play_intro()
 
 play()

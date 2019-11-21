@@ -9,7 +9,7 @@ import world
 class Player:
     def __init__(self):
         # self.name =
-        self.inventory = [items.Dagger(),
+        self.inventory = [items.Rock(),
                           items.CrustyBread()]
         self.x = world.start_tile_location[0]
         self.y = world.start_tile_location[1]
@@ -26,7 +26,7 @@ class Player:
         for item in self.inventory:
             print('*' + str(item))
         print("Gold: {}".format(self.gold))
-
+        print(input("Press Enter to go back."))
 # _______Display best weapon in inventory_______
 
 #        best_weapon = self.most_powerful_weapon()
@@ -71,7 +71,8 @@ class Player:
         consumables = [item for item in self.inventory
                        if isinstance(item, items.Consumable)]
         if not consumables:
-            print("You dont`t have any items to heal you!")
+            input("You dont`t have any items to heal you!"
+                  "Press Enter to proceed.")
             return
         for i, item in enumerate(consumables, 1):
             print("Choose an item to use to heal: ")
@@ -109,5 +110,6 @@ class Player:
     def quit_game(self):
         quit()
 
-    def restart(self):
-        pass
+    def restart_game(self):
+        print("W.I.P.")
+        quit()
