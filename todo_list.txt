@@ -1,9 +1,0 @@
-Need a way to ask player for he`s name before the game starts.
-Make more rooms
-Find a way to move between rooms.
-Find a way to auto generate a room
-make some items stackable
-make loot chest tile with random loot
-make player 2 handed, something like left_slot and right_slot
-make some items 1 hand or 2 hands
-make intro animation

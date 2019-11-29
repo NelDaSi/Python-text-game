@@ -1,2 +1,2 @@
 # Python-text-game
-Simple text game made with python3
+Trying to make a game :)
