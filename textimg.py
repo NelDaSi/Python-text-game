@@ -6,12 +6,50 @@ class TextImg:
         return self.textimg
 
 
+class Loading(TextImg):
+    def __init__(self):
+        self.textimg = """
+██╗      ██████╗  █████╗ ██████╗ ██╗███╗   ██╗ ██████╗ ██╗
+██║     ██╔═══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔════╝ ██║
+██║     ██║   ██║███████║██║  ██║██║██╔██╗ ██║██║  ███╗██║
+██║     ██║   ██║██╔══██║██║  ██║██║██║╚██╗██║██║   ██║╚═╝
+███████╗╚██████╔╝██║  ██║██████╔╝██║██║ ╚████║╚██████╔╝██╗
+╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝
+                                                          """
+#                         ,@@@@@@&*
+#                     (%              /
+#                  @*                    *@
+#              #@                          .*
+#            &               &@@//(#%@@@    #
+#           ,            @                 @@
+#          @          @          #        %&@%/
+#         @         @         @&           (*     @
+#        @        @          #@*,#@.      &         &
+#        #       @         (         @   #        &  .
+#       .       *        ,            %  %           %
+#               @        @   ,            /
+#        /     .         @            #    @       @
+#        @     @          /          /     &%        (
+#        @     &           %/      @         @       %
+#        @     #                                     (
+#         *.    %  @                       ,        %
+#           @   &@                                  ,
+#            &.  .                      , @ %      *
+#                 #                      .(      @
+#                   @                           @
+#                     (*                     @/
+#                        #@,            (@&
+#         """
+
+
 class StartTile(TextImg):
     def __init__(self):
-        self.textimg = ""
+        self.textimg = """
+
+        """
 
 
-class TrasderTile(TextImg):
+class TraderTile(TextImg):
     def __init__(self):
         self.textimg = ""
 
@@ -32,5 +70,10 @@ class EmptytTile(TextImg):
 
 
 class VictoryTile(TextImg):
+    def __init__(self):
+        self.textimg = ""
+
+
+class InvOpen(TextImg):
     def __init__(self):
         self.textimg = ""

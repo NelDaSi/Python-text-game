@@ -1,18 +1,19 @@
 # _______Imports_______
-
+# import textimg
 import items
-import world
-
+import world_check
+# from time import sleep
 # _______Player Class_______
 
 
 class Player:
     def __init__(self):
-        # self.name =
+        # self.name = None
         self.inventory = [items.Rock(),
                           items.CrustyBread()]
-        self.x = world.start_tile_location[0]
-        self.y = world.start_tile_location[1]
+        self.inv_open = False
+        self.x = world_check.start_tile_location[0]
+        self.y = world_check.start_tile_location[1]
         self.hp = 100
         self.gold = 5
         self.victory = False
@@ -20,13 +21,31 @@ class Player:
     def is_alive(self):
         return self.hp > 0
 
+    # def get_player_name(self):
+    #     while not self.name:
+    #         temp_name = input("What's your name? > ")
+    #         answer = input("Your name is {}, is that correct? [Y|N] > ".format(temp_name))
+    #         if answer.lower() in ["y", "yes"]:
+    #             self.name = temp_name
+    #             print("You are fun, {}! Let's begin our adventure!".format(self.name))
+    #             sleep(5.0)
+    #         elif answer.lower() in ["n", "no"]:
+    #             pass
+    #         else:
+    #             print("({}) is invalid".format(answer))
+    #
+    #     return self.name
+
 # _______Show inventory_______
     def print_inventory(self):
-        print("Inventory:")
+        self.inv_open = True
+        print("\nInventory:\n")
         for item in self.inventory:
             print('*' + str(item))
         print("Gold: {}".format(self.gold))
-        print(input("Press Enter to go back."))
+
+        input("\nPress enter...")
+
 # _______Display best weapon in inventory_______
 
 #        best_weapon = self.most_powerful_weapon()
@@ -94,17 +113,19 @@ class Player:
 
     def attack(self):
         best_weapon = self.most_powerful_weapon()
-        room = world.tile_at(self.x, self.y)
+        room = world_check.tile_at(self.x, self.y)
         enemy = room.enemy
-        print("You use {} against {}!".format(best_weapon.name, enemy.name))
+        print("\nYou use {} against {}!.".format(best_weapon.name, enemy.name))
         enemy.hp -= best_weapon.damage
         if not enemy.is_alive():
-            print("You killed {}!".format(enemy.name))
+            input("""\nYou killed {}!
+                  \nPress enter...""".format(enemy.name))
         else:
-            print("{} HP is {}.".format(enemy.name, enemy.hp))
+            input("""\n{} HP is {}.
+                  \nPress enter...""".format(enemy.name, enemy.hp))
 
     def trade(self):
-        room = world.tile_at(self.x, self.y)
+        room = world_check.tile_at(self.x, self.y)
         room.check_if_trade(self)
 
     def quit_game(self):
